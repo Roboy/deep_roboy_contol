@@ -6,6 +6,8 @@ source /opt/ros/kinetic/setup.bash
 ```
 
 2. Compile ROS2 `bouncy` from source without `ros1_bridge` following the instructions [here](https://index.ros.org/doc/ros2/Linux-Development-Setup/). 
+Note: ROS2 will be installed for `python3`, i.e. whatever python executable is linked to `python3` alias (you probably want it to point at `python3.6`).
+
 As the last step instead of
 ```
 colcon build --symlink-install
