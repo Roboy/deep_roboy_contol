@@ -5,20 +5,19 @@ from stable_baselines.common import set_global_seeds
 from stable_baselines import PPO2
 
 
-def setup_env_fn(rank, seed=0):
-    """Sets up an env_fn with a specific seed"""
+def setup_constructor(rank, seed=0):
 
-    def env_fn():
+    def our_env_constructor() -> gym.Env:
         environment = gym.make("MountainCarContinuous-v0")
         environment.seed(seed + rank)
         return environment
 
     set_global_seeds(seed)
-    return env_fn
+    return our_env_constructor
 
 
 num_cpu = 2
-env = SubprocVecEnv([setup_env_fn(i) for i in range(num_cpu)])
+env = SubprocVecEnv([setup_constructor(i) for i in range(num_cpu)])
 
 model = PPO2("MlpPolicy", env, verbose=1)
 model.learn(total_timesteps=25000)

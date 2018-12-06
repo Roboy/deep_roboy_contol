@@ -4,8 +4,13 @@ from stable_baselines.common.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
 from stable_baselines import PPO2
 
+
+def our_env_constructor() -> gym.Env:
+    return gym.make("MountainCarContinuous-v0")
+
+
 # The algorithms require a vectorized environment to run
-env = DummyVecEnv([lambda: gym.make("MountainCarContinuous-v0")])
+env = DummyVecEnv([our_env_constructor])
 
 agent = PPO2(MlpPolicy, env, verbose=1)
 
