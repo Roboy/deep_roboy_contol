@@ -72,7 +72,7 @@ python3 subscriber.py
 ```
 # in a new terminal
 source <catkin_ws_with_CARDSflow>/devel/setup.bash
-roslaunch kindyn robot.launch robot_name:=msj_platform start_controllers:='sphere_axis0 sphere_axis1 sphere_axis2
+roslaunch kindyn robot.launch robot_name:=msj_platform start_controllers:='sphere_axis0 sphere_axis1 sphere_axis2'
 ```
 
 ```
