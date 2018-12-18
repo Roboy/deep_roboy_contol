@@ -8,10 +8,10 @@
 # Other combinations may break: https://github.com/tensorflow/tensorflow/issues/15604
 # After completion, you should reboot the instance
 
-# setup Python3 with pip and venv
+# setup Python3.6 with pip and venv
 sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update
-sudo apt install python3.6
+sudo apt install python3.6-dev
 sudo curl https://bootstrap.pypa.io/get-pip.py | sudo python3.6
 sudo apt install python3.6-venv
 
@@ -43,10 +43,13 @@ python3.6 -m pip install tensorflow-gpu==1.10
 
 # Install and configure jupyter
 python3.6 -m pip install jupyter
-$(which jupyter) notebook --generate-config1
+$(which jupyter) notebook --generate-config
 echo "c = get_config()" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.ip = '*'" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.open_browser = False" >> $HOME/.jupyter/jupyter_notebook_config.py
 echo "c.NotebookApp.port = 8888" >> $HOME/.jupyter/jupyter_notebook_config.py
+
+# Install OpenAI baselines requirements
+sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zlib1g-dev -y
 
 sudo reboot
