@@ -5,7 +5,12 @@
 source /opt/ros/kinetic/setup.bash
 ```
 
-2. Compile ROS2 `bouncy` from source without `ros1_bridge` following the instructions [here](https://index.ros.org/doc/ros2/Linux-Development-Setup/). 
+2. Get ROS2 `bouncy`
+### Option 1: Install from binaries
+Install ROS2 `bouncy` distro from debian packages or "fat" archives as described [here](https://index.ros.org/doc/ros2/Installation/). 
+
+### Option 2: Compile from sources
+Compile ROS2 `bouncy` from source without `ros1_bridge` following the instructions [here](https://index.ros.org/doc/ros2/Linux-Development-Setup/). 
 Note: ROS2 will be installed for `python3`, i.e. whatever python executable is linked to `python3` alias (you probably want it to point at `python3.6`).
 
 As the last step instead of
@@ -18,7 +23,17 @@ colcon build --symlink-install --packages-skip ros1_bridge
 ```
 From now on we will assume your ROS2 installation workspace is in `~/ros2_install`
 
-3. Compile `roboy_communication` for ROS2
+3. Get `roboy_communication`
+### Option 1
+Install `ros-bouncy-roboy-msgs` from Roboy's debian packages:
+```
+wget -qO - http://bot.roboy.org:8081/~roboy/dists/stable/main/binary/public.key | sudo apt-key add -
+echo "deb ftp://bot.roboy.org/dists/stable/main/binary /" | sudo tee -a /etc/apt/sources.list.d/ros2-latest.list
+
+sudo apt install ros-bouncy-roboy-msgs
+```
+### Option 2
+Compile `roboy_communication` for ROS2
 ```
 # in a new terminal
 mkdir -p ~/ros2_ws/src
@@ -43,7 +58,19 @@ cd <catkin_ws_with_CARDSflow>
 catkin_make
 ```
 
-5. Build `ros1_bridge` (you can find more instruction [here](https://github.com/ros2/ros1_bridge))
+5. Get `ros1_bridge`
+### Option 1
+Install `ros1_bridge` from Roboy's debian packages:
+```
+# add sources only if not done before
+wget -qO - http://bot.roboy.org:8081/~roboy/dists/stable/main/binary/public.key | sudo apt-key add -
+echo "deb ftp://bot.roboy.org/dists/stable/main/binary /" | sudo tee -a /etc/apt/sources.list.d/ros2-latest.list
+
+sudo apt install ros-kinetic-roboy-msgs ros-bouncy-roboy-msgs ros-bouncy-roboy-ros1-bridge
+```
+
+### Option 2
+Build `ros1_bridge` (you can find more instruction [here](https://github.com/ros2/ros1_bridge))
 ```
 # in a new terminal
 # source both ROS distros
