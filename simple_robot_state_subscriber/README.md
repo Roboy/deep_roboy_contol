@@ -29,6 +29,7 @@ Install `ros-bouncy-roboy-msgs` from Roboy's debian packages:
 ```
 wget -qO - http://bot.roboy.org:8081/~roboy/dists/stable/main/binary/public.key | sudo apt-key add -
 echo "deb ftp://bot.roboy.org/dists/stable/main/binary /" | sudo tee -a /etc/apt/sources.list.d/ros2-latest.list
+sudo apt update
 
 sudo apt install ros-bouncy-roboy-msgs
 ```
@@ -65,6 +66,7 @@ Install `ros1_bridge` from Roboy's debian packages:
 # add sources only if not done before
 wget -qO - http://bot.roboy.org:8081/~roboy/dists/stable/main/binary/public.key | sudo apt-key add -
 echo "deb ftp://bot.roboy.org/dists/stable/main/binary /" | sudo tee -a /etc/apt/sources.list.d/ros2-latest.list
+sudo apt update
 
 sudo apt install ros-kinetic-roboy-msgs ros-bouncy-roboy-msgs ros-bouncy-roboy-ros1-bridge
 ```
