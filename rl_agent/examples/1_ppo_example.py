@@ -30,7 +30,7 @@ def callback(_locals, _globals):
   """
   global n_steps, best_mean_reward
   # Print stats every 1000 calls
-  if (n_steps + 1) % 1000 == 0:
+  if (n_steps + 1) % 10 == 0:
       # Evaluate policy performance
       x, y = ts2xy(load_results(log_dir), 'timesteps')
       if len(x) > 0:
@@ -63,17 +63,22 @@ env = DummyVecEnv([lambda:env])
 
 agent = PPO1(MlpPolicy, env, verbose=1)
 
-agent.learn(total_timesteps=1000, callback= callback)
+agent.learn(total_timesteps=10, callback= callback)
 
 obs = env.reset()
 for _ in range(100):
     # internal_state is only used with recurrent policies
     obs = env.reset()
     done = False
-    while not done:
+    i = 0
+    while not done and i < 10:
+	    self.node.get_logger().info("number of it: %i" % i)
+        
 	    action, _ = agent.predict(obs)
 	    obs, reward, done, info = env.step(action)
 	    print("step reward:", reward)
+	    self.node.get_logger().info("reward: %f" % reward)
 	    time.sleep(0.01)
+	    i += 1
     print('reached goal')
 
